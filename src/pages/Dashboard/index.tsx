@@ -46,6 +46,12 @@ const Dashboard: React.FC = () => {
         } else {
           transaction.formattedValue = formatValue(Number(transaction.value));
         }
+        transaction.formattedDate = new Date(
+          transaction.created_at,
+        ).toLocaleDateString('pt-br');
+        /* transaction.formattedDate = String(transaction.created_at)
+          .split('T')[0]
+          .replace(/-/g, '/'); */
       });
 
       setTransactions(response.data.transactions);
@@ -107,7 +113,7 @@ const Dashboard: React.FC = () => {
                     {transaction.formattedValue}
                   </td>
                   <td>{transaction.category.title}</td>
-                  <td>{transaction.created_at}</td>
+                  <td>{transaction.formattedDate}</td>
                 </tr>
               ))}
             </tbody>
